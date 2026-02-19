@@ -1,11 +1,30 @@
-<div align="center">
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+# Age Calculator App 🎂
 
-  <h1>Built with AI Studio</h2>
+A sleek, high-performance Age Calculator built with Expo and React Native. Features a modern dark UI and precise age statistics (Total months, weeks, days, hours, and next birthday countdown).
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+## 🚀 Getting Started
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-</div>
+2. **Generate Native Folders**
+   Since the `android` and `ios` directories are ignored, regenerate them locally:
+   ```bash
+   npx expo prebuild
+   ```
+
+3. **Run the App**
+   *   **Android:** `npx expo run:android`
+   *   **iOS:** `npx expo run:ios`
+   *   **Development Server:** `npx expo start`
+
+## 🛠 Project Structure
+*   `app/` - Contains the main routing and screen logic via Expo Router.
+*   `app.json` - Configuration for Expo and native build properties.
+*   `babel.config.js` - Configured for Reanimated plugins.
+
+## 🔐 Security Note
+Ensure `keystore.properties` is added to your local environment but **never** committed to the repository.

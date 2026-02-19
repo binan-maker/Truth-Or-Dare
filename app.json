@@ -1,0 +1,37 @@
+
+{
+  "expo": {
+    "name": "Truth & Challenge",
+    "slug": "truth-challenge",
+    "version": "1.0.10",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "agecalc",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": false,
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "android": {
+      "package": "com.binan.statussaver",
+      "edgeToEdgeEnabled": true,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#000000"
+      }
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "kotlinVersion": "1.9.24"
+          }
+        }
+      ]
+    ]
+  }
+}

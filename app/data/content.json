@@ -1,0 +1,66 @@
+{
+  "party": {
+    "truths": [
+      "What is the most embarrassing thing you've done at a party?",
+      "Who in this room would you most like to be stranded on a deserted island with?",
+      "What is the biggest lie you've ever told your parents?",
+      "Have you ever ghosted someone? Why?",
+      "What is your most useless talent?"
+    ],
+    "challenges": [
+      "Do your best impression of someone in the room until someone guesses who it is.",
+      "Let the person to your right redo your hair however they want.",
+      "Show the most embarrassing photo on your phone.",
+      "Try to lick your elbow.",
+      "Dance for 30 seconds to a song chosen by the group."
+    ]
+  },
+  "couple": {
+    "truths": [
+      "What was your first impression of me?",
+      "What is one thing I do that always makes you smile?",
+      "If we could travel anywhere right now, where would it be?",
+      "What is your favorite memory of us together?",
+      "What is one thing you've always wanted to ask me but were too shy?"
+    ],
+    "challenges": [
+      "Give me a 30-second back massage.",
+      "Stare into my eyes for 1 minute without laughing.",
+      "Whisper something sweet in my ear.",
+      "Recreate our first kiss.",
+      "Write a short poem about me in 2 minutes."
+    ]
+  },
+  "family": {
+    "truths": [
+      "What is your favorite family tradition?",
+      "If you could change one rule in the house, what would it be?",
+      "Who is the funniest person in the family?",
+      "What is the best meal your parents make?",
+      "What is one thing you are really proud of?"
+    ],
+    "challenges": [
+      "Tell a joke that makes everyone laugh.",
+      "Do 10 pushups.",
+      "Sing a nursery rhyme in a funny voice.",
+      "Help clean up one thing in the room right now.",
+      "Give everyone in the room a high-five."
+    ]
+  },
+  "solo": {
+    "truths": [
+      "What is one thing you are most afraid of failing at?",
+      "What is a habit you want to break this year?",
+      "If you could talk to your younger self, what would you say?",
+      "What is your biggest insecurity?",
+      "What does success look like to you?"
+    ],
+    "challenges": [
+      "Go to a mirror and say 3 things you love about yourself.",
+      "Write down 3 goals for the next month.",
+      "Do 20 jumping jacks right now.",
+      "Take a deep breath and hold it for 10 seconds.",
+      "Call or text a friend just to say 'Hi'."
+    ]
+  }
+}
