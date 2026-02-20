@@ -9,13 +9,7 @@ export default function TabsLayout() {
         tabBarStyle: { display: 'none' }, // Hides the bar completely
       }}
     >
-      <Tabs.Screen 
-        name="index" 
-        options={{ 
-          title: 'Calculator'
-          // Removed href: null to ensure this is a valid route for the navigator
-        }} 
-      />
+      <Tabs.Screen name="index" options={{ title: 'Truth or Dare' }} />
     </Tabs>
   );
 }
