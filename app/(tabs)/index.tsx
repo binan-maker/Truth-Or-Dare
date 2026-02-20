@@ -1,130 +1,159 @@
-
-import React, { useState, useCallback } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
-  Dimensions,
+  StatusBar,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import contentData from '../data/content.json';
 
-const { width } = Dimensions.get('window');
-
 type Mode = 'party' | 'couple' | 'family' | 'solo';
 type EntryType = 'truth' | 'challenge';
 
+type PromptEntry = {
+  text: string;
+  type: EntryType;
+};
+
+const modes: Array<{ label: string; value: Mode }> = [
+  { label: 'Party', value: 'party' },
+  { label: 'Couple', value: 'couple' },
+  { label: 'Family', value: 'family' },
+  { label: 'Solo', value: 'solo' },
+];
+
 export default function TruthOrDareScreen() {
   const [mode, setMode] = useState<Mode>('party');
-  const [currentEntry, setCurrentEntry] = useState<{ text: string; type: EntryType } | null>(null);
+  const [currentEntry, setCurrentEntry] = useState<PromptEntry | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [turnCount, setTurnCount] = useState(0);
 
-  const generatePrompt = useCallback((selectedType?: EntryType) => {
+  const generatePrompt = (selectedType?: EntryType) => {
     setIsGenerating(true);
-    
-    // Simulate a bit of "thinking" for dopamine effect
-    setTimeout(() => {
-      const type: EntryType = selectedType || (Math.random() > 0.5 ? 'truth' : 'challenge');
-      const pool = type === 'truth' ? contentData[mode].truths : contentData[mode].challenges;
-      const randomIndex = Math.floor(Math.random() * pool.length);
-      
-      setCurrentEntry({
-        text: pool[randomIndex],
-        type: type
-      });
-      setIsGenerating(false);
-    }, 400);
-  }, [mode]);
 
-  const reset = () => {
-    setCurrentEntry(null);
+    setTimeout(() => {
+      const type: EntryType = selectedType ?? (Math.random() > 0.5 ? 'truth' : 'challenge');
+      const pool = type === 'truth' ? contentData[mode].truths : contentData[mode].challenges;
+
+      if (pool.length === 0) {
+        setCurrentEntry({
+          text: 'No prompts available for this mode yet. Add more content and try again.',
+          type,
+        });
+        setIsGenerating(false);
+        return;
+      }
+
+      const randomIndex = Math.floor(Math.random() * pool.length);
+      setCurrentEntry({ text: pool[randomIndex], type });
+      setTurnCount(previous => previous + 1);
+      setIsGenerating(false);
+    }, 300);
   };
 
-  const ModeButton = ({ label, value }: { label: string; value: Mode }) => (
-    <TouchableOpacity 
-      style={[styles.modeBtn, mode === value && styles.modeBtnActive]} 
-      onPress={() => {
-        setMode(value);
-        setCurrentEntry(null);
-      }}
-    >
-      <Text style={[styles.modeBtnText, mode === value && styles.modeBtnTextActive]}>
-        {label.toUpperCase()}
-      </Text>
-    </TouchableOpacity>
-  );
+  const changeMode = (nextMode: Mode) => {
+    setMode(nextMode);
+    setCurrentEntry(null);
+    setIsGenerating(false);
+  };
+
+  const subtitle = useMemo(() => {
+    if (!currentEntry) {
+      return 'Choose a mode, then generate Truth or Challenge prompts to play offline.';
+    }
+
+    return 'Speak the answer or perform the challenge in real life, then move to next turn.';
+  }, [currentEntry]);
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
-      
-      {/* Header */}
+
       <View style={styles.header}>
         <View>
           <Text style={styles.brand}>SOCIAL ENGINE</Text>
           <Text style={styles.title}>TRUTH OR DARE</Text>
+          <Text style={styles.subtitle}>{subtitle}</Text>
         </View>
-        <View style={styles.versionBadge}>
-          <Text style={styles.versionText}>v1.0</Text>
+        <View style={styles.counterBadge}>
+          <Text style={styles.counterLabel}>TURNS</Text>
+          <Text style={styles.counterValue}>{turnCount}</Text>
         </View>
       </View>
 
-      {/* Mode Selector */}
       {!currentEntry && (
         <View style={styles.modeContainer}>
           <Text style={styles.sectionLabel}>CHOOSE YOUR VIBE</Text>
           <View style={styles.modeGrid}>
-            <ModeButton label="Party" value="party" />
-            <ModeButton label="Couple" value="couple" />
-          </View>
-          <View style={[styles.modeGrid, { marginTop: 12 }]}>
-            <ModeButton label="Family" value="family" />
-            <ModeButton label="Solo" value="solo" />
+            {modes.map(({ label, value }) => (
+              <TouchableOpacity
+                key={value}
+                style={[styles.modeBtn, mode === value && styles.modeBtnActive]}
+                onPress={() => changeMode(value)}
+              >
+                <Text style={[styles.modeBtnText, mode === value && styles.modeBtnTextActive]}>
+                  {label.toUpperCase()}
+                </Text>
+              </TouchableOpacity>
+            ))}
           </View>
         </View>
       )}
 
-      {/* Main Stage */}
       <View style={styles.stage}>
         {!currentEntry ? (
           <View style={styles.emptyStage}>
-            <Text style={styles.emptyTitle}>READY TO BREAK THE SILENCE?</Text>
-            <Text style={styles.emptySubtitle}>Select a mode and hit the button to start the interaction loop.</Text>
-            
-            <TouchableOpacity 
-              style={styles.mainActionBtn}
+            <Text style={styles.emptyTitle}>READY TO START?</Text>
+
+            <View style={styles.dualActionRow}>
+              <TouchableOpacity
+                style={[styles.actionBtn, styles.truthBtn]}
+                onPress={() => generatePrompt('truth')}
+                disabled={isGenerating}
+              >
+                <Text style={styles.actionBtnText}>{isGenerating ? 'LOADING...' : 'TRUTH'}</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={[styles.actionBtn, styles.challengeBtn]}
+                onPress={() => generatePrompt('challenge')}
+                disabled={isGenerating}
+              >
+                <Text style={styles.actionBtnText}>{isGenerating ? 'LOADING...' : 'CHALLENGE'}</Text>
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity
+              style={styles.randomBtn}
               onPress={() => generatePrompt()}
               disabled={isGenerating}
             >
-              <Text style={styles.mainActionBtnText}>
-                {isGenerating ? 'GENERATING...' : 'START ENGINE'}
-              </Text>
+              <Text style={styles.randomBtnText}>{isGenerating ? 'GENERATING...' : 'RANDOM TURN'}</Text>
             </TouchableOpacity>
           </View>
         ) : (
           <View style={styles.activeStage}>
-            <View style={[styles.typeBadge, { backgroundColor: currentEntry.type === 'truth' ? '#00FF00' : '#FF00FF' }]}>
+            <View
+              style={[
+                styles.typeBadge,
+                { backgroundColor: currentEntry.type === 'truth' ? '#00FF00' : '#FF00FF' },
+              ]}
+            >
               <Text style={styles.typeBadgeText}>{currentEntry.type.toUpperCase()}</Text>
             </View>
-            
+
             <View style={styles.promptContainer}>
               <Text style={styles.promptText}>{currentEntry.text}</Text>
             </View>
 
             <View style={styles.actionRow}>
-              <TouchableOpacity 
-                style={styles.secondaryBtn}
-                onPress={reset}
-              >
+              <TouchableOpacity style={styles.secondaryBtn} onPress={() => setCurrentEntry(null)}>
                 <Text style={styles.secondaryBtnText}>CHANGE MODE</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity 
-                style={styles.primaryBtn}
-                onPress={() => generatePrompt()}
-              >
+              <TouchableOpacity style={styles.primaryBtn} onPress={() => generatePrompt()}>
                 <Text style={styles.primaryBtnText}>NEXT TURN</Text>
               </TouchableOpacity>
             </View>
@@ -132,9 +161,8 @@ export default function TruthOrDareScreen() {
         )}
       </View>
 
-      {/* Footer */}
       <View style={styles.footer}>
-        <Text style={styles.footerText}>OFFLINE ENGINE • NO DATA TRACKING • PURE INTERACTION</Text>
+        <Text style={styles.footerText}>OFFLINE ENGINE • NO LOGIN • NO TRACKING • PURE INTERACTION</Text>
       </View>
     </SafeAreaView>
   );
@@ -152,6 +180,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     borderBottomWidth: 2,
     borderBottomColor: '#000000',
+    gap: 16,
   },
   brand: {
     fontSize: 12,
@@ -167,16 +196,34 @@ const styles = StyleSheet.create({
     lineHeight: 32,
     marginTop: 4,
   },
-  versionBadge: {
-    backgroundColor: '#000000',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 4,
+  subtitle: {
+    marginTop: 10,
+    maxWidth: 240,
+    color: '#000000',
+    opacity: 0.65,
+    fontSize: 12,
+    lineHeight: 18,
+    fontWeight: '600',
   },
-  versionText: {
-    color: '#FFFFFF',
-    fontSize: 10,
+  counterBadge: {
+    borderWidth: 2,
+    borderColor: '#000000',
+    minWidth: 68,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    alignItems: 'center',
+  },
+  counterLabel: {
+    fontSize: 9,
+    letterSpacing: 1,
     fontWeight: '900',
+    color: '#000000',
+    opacity: 0.55,
+  },
+  counterValue: {
+    fontSize: 20,
+    fontWeight: '900',
+    color: '#000000',
   },
   modeContainer: {
     padding: 24,
@@ -185,15 +232,16 @@ const styles = StyleSheet.create({
     fontSize: 10,
     fontWeight: '900',
     letterSpacing: 1,
-    marginBottom: 16,
+    marginBottom: 14,
     color: '#000000',
   },
   modeGrid: {
     flexDirection: 'row',
-    gap: 12,
+    gap: 10,
+    flexWrap: 'wrap',
   },
   modeBtn: {
-    flex: 1,
+    width: '48%',
     paddingVertical: 12,
     borderWidth: 2,
     borderColor: '#000000',
@@ -220,34 +268,43 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   emptyTitle: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: '900',
     textAlign: 'center',
+    marginBottom: 20,
+  },
+  dualActionRow: {
+    flexDirection: 'row',
+    gap: 12,
     marginBottom: 12,
   },
-  emptySubtitle: {
-    fontSize: 14,
-    textAlign: 'center',
-    color: '#000000',
-    opacity: 0.6,
-    marginBottom: 40,
-    lineHeight: 20,
-  },
-  mainActionBtn: {
-    backgroundColor: '#00FF00',
-    width: '100%',
-    paddingVertical: 20,
-    borderWidth: 3,
+  actionBtn: {
+    flex: 1,
+    borderWidth: 2,
     borderColor: '#000000',
+    paddingVertical: 16,
     alignItems: 'center',
-    shadowColor: '#000000',
-    shadowOffset: { width: 6, height: 6 },
-    shadowOpacity: 1,
-    shadowRadius: 0,
-    elevation: 5,
   },
-  mainActionBtnText: {
-    fontSize: 20,
+  truthBtn: {
+    backgroundColor: '#00FF00',
+  },
+  challengeBtn: {
+    backgroundColor: '#FF00FF',
+  },
+  actionBtnText: {
+    fontSize: 14,
+    fontWeight: '900',
+    color: '#000000',
+  },
+  randomBtn: {
+    width: '100%',
+    borderWidth: 2,
+    borderColor: '#000000',
+    paddingVertical: 16,
+    alignItems: 'center',
+  },
+  randomBtnText: {
+    fontSize: 14,
     fontWeight: '900',
     color: '#000000',
   },
@@ -276,7 +333,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: '#000000',
     backgroundColor: '#FFFFFF',
-    marginBottom: 40,
+    marginBottom: 30,
     shadowColor: '#000000',
     shadowOffset: { width: 8, height: 8 },
     shadowOpacity: 1,
@@ -332,7 +389,7 @@ const styles = StyleSheet.create({
     fontSize: 8,
     fontWeight: '900',
     color: '#000000',
-    opacity: 0.4,
+    opacity: 0.5,
     letterSpacing: 1,
   },
 });
