@@ -298,12 +298,12 @@ const styles = StyleSheet.create({
   },
   modeGrid: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 12,
     flexWrap: 'wrap',
   },
   modeBtn: {
     width: '48%',
-    paddingVertical: 10,
+    paddingVertical: 12,
     borderWidth: 2,
     borderColor: '#000000',
     alignItems: 'center',
@@ -403,14 +403,14 @@ const styles = StyleSheet.create({
   },
   dualActionRow: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 12,
     marginBottom: 12,
   },
   actionBtn: {
     flex: 1,
     borderWidth: 2,
     borderColor: '#000000',
-    paddingVertical: 14,
+    paddingVertical: 16,
     alignItems: 'center',
   },
   truthBtn: {
@@ -420,7 +420,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF00FF',
   },
   actionBtnText: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '900',
     color: '#000000',
   },
@@ -428,11 +428,11 @@ const styles = StyleSheet.create({
     width: '100%',
     borderWidth: 2,
     borderColor: '#000000',
-    paddingVertical: 14,
+    paddingVertical: 16,
     alignItems: 'center',
   },
   randomBtnText: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '900',
     color: '#000000',
   },
@@ -475,7 +475,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: '#000000',
     backgroundColor: '#FFFFFF',
-    marginBottom: 24,
+    marginBottom: 30,
     shadowColor: '#000000',
     shadowOffset: { width: 8, height: 8 },
     shadowOpacity: 1,
