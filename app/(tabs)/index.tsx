@@ -1,4 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
+import { useRouter } from 'expo-router';
 import {
   Animated,
   Easing,
@@ -29,6 +30,7 @@ const modes: Array<{ label: string; value: Mode }> = [
 const seatLabels = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
 
 export default function TruthOrDareScreen() {
+  const router = useRouter();
   const [mode, setMode] = useState<Mode>('party');
   const [currentEntry, setCurrentEntry] = useState<PromptEntry | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -115,9 +117,16 @@ export default function TruthOrDareScreen() {
           <Text style={styles.title}>TRUTH OR DARE</Text>
           <Text style={styles.subtitle}>{subtitle}</Text>
         </View>
-        <View style={styles.counterBadge}>
-          <Text style={styles.counterLabel}>TURNS</Text>
-          <Text style={styles.counterValue}>{turnCount}</Text>
+
+        <View style={styles.headerRight}>
+          <TouchableOpacity style={styles.settingsBtn} onPress={() => router.push('/settings')}>
+            <Text style={styles.settingsIcon}>⚙</Text>
+          </TouchableOpacity>
+
+          <View style={styles.counterBadge}>
+            <Text style={styles.counterLabel}>TURNS</Text>
+            <Text style={styles.counterValue}>{turnCount}</Text>
+          </View>
         </View>
       </View>
 
@@ -222,7 +231,7 @@ export default function TruthOrDareScreen() {
       </View>
 
       <View style={styles.footer}>
-        <Text style={styles.footerText}>OFFLINE ENGINE • BOTTLE MODE • NO LOGIN • PURE INTERACTION</Text>
+        <Text style={styles.footerText}>OFFLINE ENGINE • BOTTLE MODE • NO LOGIN • NO NAV BAR</Text>
       </View>
     </SafeAreaView>
   );
@@ -231,7 +240,7 @@ export default function TruthOrDareScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#0C0C0E',
   },
   header: {
     padding: 24,
@@ -239,35 +248,54 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     borderBottomWidth: 2,
-    borderBottomColor: '#000000',
+    borderBottomColor: '#2A2A2E',
     gap: 16,
   },
   brand: {
     fontSize: 12,
     fontWeight: '900',
     letterSpacing: 2,
-    color: '#000000',
+    color: '#FFFFFF',
     opacity: 0.5,
   },
   title: {
-    fontSize: 32,
+    fontSize: 34,
     fontWeight: '900',
-    color: '#000000',
+    color: '#FFFFFF',
     lineHeight: 32,
     marginTop: 4,
   },
   subtitle: {
     marginTop: 10,
     maxWidth: 240,
-    color: '#000000',
-    opacity: 0.65,
+    color: '#D6D6DC',
+    opacity: 0.95,
     fontSize: 12,
     lineHeight: 18,
     fontWeight: '600',
   },
+  headerRight: {
+    alignItems: 'flex-end',
+    gap: 10,
+  },
+  settingsBtn: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    borderWidth: 2,
+    borderColor: '#2EFF9B',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#121216',
+  },
+  settingsIcon: {
+    fontSize: 20,
+    fontWeight: '900',
+    color: '#2EFF9B',
+  },
   counterBadge: {
     borderWidth: 2,
-    borderColor: '#000000',
+    borderColor: '#2EFF9B',
     minWidth: 68,
     paddingVertical: 6,
     paddingHorizontal: 10,
@@ -277,13 +305,13 @@ const styles = StyleSheet.create({
     fontSize: 9,
     letterSpacing: 1,
     fontWeight: '900',
-    color: '#000000',
-    opacity: 0.55,
+    color: '#A5F9CD',
+    opacity: 0.9,
   },
   counterValue: {
     fontSize: 20,
     fontWeight: '900',
-    color: '#000000',
+    color: '#FFFFFF',
   },
   modeContainer: {
     paddingHorizontal: 24,
@@ -294,7 +322,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     letterSpacing: 1,
     marginBottom: 14,
-    color: '#000000',
+    color: '#AFAFBB',
   },
   modeGrid: {
     flexDirection: 'row',
@@ -305,20 +333,20 @@ const styles = StyleSheet.create({
     width: '48%',
     paddingVertical: 12,
     borderWidth: 2,
-    borderColor: '#000000',
+    borderColor: '#3C3C44',
     alignItems: 'center',
     justifyContent: 'center',
   },
   modeBtnActive: {
-    backgroundColor: '#000000',
+    backgroundColor: '#2EFF9B',
   },
   modeBtnText: {
     fontSize: 12,
     fontWeight: '900',
-    color: '#000000',
+    color: '#FFFFFF',
   },
   modeBtnTextActive: {
-    color: '#FFFFFF',
+    color: '#0D0D0F',
   },
   stage: {
     flex: 1,
@@ -333,6 +361,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     textAlign: 'center',
     marginBottom: 14,
+    color: '#FFFFFF',
   },
   arena: {
     width: 270,
@@ -397,9 +426,9 @@ const styles = StyleSheet.create({
   pickedSeatText: {
     fontSize: 11,
     fontWeight: '900',
-    color: '#000000',
+    color: '#D7D7E0',
     marginBottom: 14,
-    opacity: 0.75,
+    opacity: 0.85,
   },
   dualActionRow: {
     flexDirection: 'row',
@@ -427,14 +456,15 @@ const styles = StyleSheet.create({
   randomBtn: {
     width: '100%',
     borderWidth: 2,
-    borderColor: '#000000',
+    borderColor: '#2EFF9B',
+    backgroundColor: '#15151B',
     paddingVertical: 16,
     alignItems: 'center',
   },
   randomBtnText: {
     fontSize: 14,
     fontWeight: '900',
-    color: '#000000',
+    color: '#E8FFF2',
   },
   activeStage: {
     flex: 1,
@@ -524,13 +554,13 @@ const styles = StyleSheet.create({
   footer: {
     padding: 24,
     borderTopWidth: 2,
-    borderTopColor: '#000000',
+    borderTopColor: '#2A2A2E',
     alignItems: 'center',
   },
   footerText: {
-    fontSize: 8,
+    fontSize: 9,
     fontWeight: '900',
-    color: '#000000',
+    color: '#B5B5C0',
     opacity: 0.5,
     letterSpacing: 1,
     textAlign: 'center',

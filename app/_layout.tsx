@@ -40,6 +40,7 @@ export default function RootLayout() {
         <StatusBar style="light" translucent backgroundColor="transparent" />
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="settings" options={{ headerShown: false }} />
         </Stack>
       </GestureHandlerRootView>
     </SafeAreaProvider>
