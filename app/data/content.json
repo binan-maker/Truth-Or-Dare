@@ -5,14 +5,24 @@
       "Who in this room would you most like to be stranded on a deserted island with?",
       "What is the biggest lie you've ever told your parents?",
       "Have you ever ghosted someone? Why?",
-      "What is your most useless talent?"
+      "What is your most useless talent?",
+      "What is one rumor about you that is actually true?",
+      "What was your worst fashion choice ever?",
+      "Who here do you think gives the best advice?",
+      "What is one thing you pretend to like but actually don't?",
+      "What is your most awkward DM story?"
     ],
     "challenges": [
       "Do your best impression of someone in the room until someone guesses who it is.",
       "Let the person to your right redo your hair however they want.",
       "Show the most embarrassing photo on your phone.",
       "Try to lick your elbow.",
-      "Dance for 30 seconds to a song chosen by the group."
+      "Dance for 30 seconds to a song chosen by the group.",
+      "Speak in a robot voice for the next 2 rounds.",
+      "Balance a book on your head and walk across the room.",
+      "Do 15 squats while saying your name dramatically.",
+      "Tell a joke in under 10 seconds.",
+      "Act like a celebrity entering a red carpet for 20 seconds."
     ]
   },
   "couple": {
@@ -21,14 +31,24 @@
       "What is one thing I do that always makes you smile?",
       "If we could travel anywhere right now, where would it be?",
       "What is your favorite memory of us together?",
-      "What is one thing you've always wanted to ask me but were too shy?"
+      "What is one thing you've always wanted to ask me but were too shy?",
+      "What habit of mine do you find adorable?",
+      "What do you think we do best as a team?",
+      "When do you feel most loved by me?",
+      "What is one dream you want us to achieve together?",
+      "What is a small thing I did that you still remember?"
     ],
     "challenges": [
       "Give me a 30-second back massage.",
       "Stare into my eyes for 1 minute without laughing.",
       "Whisper something sweet in my ear.",
       "Recreate our first kiss.",
-      "Write a short poem about me in 2 minutes."
+      "Write a short poem about me in 2 minutes.",
+      "Hold hands silently for 45 seconds.",
+      "Give me a genuine compliment using only 7 words.",
+      "Do a 20-second slow dance with me.",
+      "Describe our future date night in one minute.",
+      "Say three things you appreciate about me right now."
     ]
   },
   "family": {
@@ -37,14 +57,24 @@
       "If you could change one rule in the house, what would it be?",
       "Who is the funniest person in the family?",
       "What is the best meal your parents make?",
-      "What is one thing you are really proud of?"
+      "What is one thing you are really proud of?",
+      "What is a lesson you learned from someone in this family?",
+      "Which family moment always makes you laugh?",
+      "What is one chore you dislike the most?",
+      "Who in the family gives the best hugs?",
+      "What is one family trip you want to take?"
     ],
     "challenges": [
       "Tell a joke that makes everyone laugh.",
       "Do 10 pushups.",
       "Sing a nursery rhyme in a funny voice.",
       "Help clean up one thing in the room right now.",
-      "Give everyone in the room a high-five."
+      "Give everyone in the room a high-five.",
+      "Do your best animal sound impression.",
+      "Name 5 fruits in 5 seconds.",
+      "Hop on one leg for 15 seconds.",
+      "Say something kind to each person in the room.",
+      "Do a 20-second happy dance."
     ]
   },
   "solo": {
@@ -53,14 +83,24 @@
       "What is a habit you want to break this year?",
       "If you could talk to your younger self, what would you say?",
       "What is your biggest insecurity?",
-      "What does success look like to you?"
+      "What does success look like to you?",
+      "What is one boundary you want to protect better?",
+      "What belief about yourself are you trying to rewrite?",
+      "What distraction steals most of your day?",
+      "What are you most grateful for today?",
+      "What is one promise you want to keep to yourself?"
     ],
     "challenges": [
       "Go to a mirror and say 3 things you love about yourself.",
       "Write down 3 goals for the next month.",
       "Do 20 jumping jacks right now.",
       "Take a deep breath and hold it for 10 seconds.",
-      "Call or text a friend just to say 'Hi'."
+      "Call or text a friend just to say 'Hi'.",
+      "Drink a full glass of water now.",
+      "Do a 1-minute stretch routine.",
+      "Write one sentence about your ideal day.",
+      "Set a 10-minute timer and declutter one small area.",
+      "Send a thank-you message to someone you value."
     ]
   }
 }
